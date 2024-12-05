@@ -1,0 +1,31 @@
+{
+  "extends": "@tsconfig/strictest/tsconfig",
+  "compilerOptions": {
+    "lib": ["es2023"],
+    "module": "node16",
+    "target": "es2022",
+    "moduleResolution": "node16",
+    "declaration": true,
+    "removeComments": true,
+    "allowSyntheticDefaultImports": true,
+    "sourceMap": true,
+    "allowJs": false,
+    "checkJs": false,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "forceConsistentCasingInFileNames": true,
+    "incremental": true,
+    "skipLibCheck": true,
+    "noImplicitAny": true,
+    "strictBindCallApply": false,
+    "outDir": "./dist",
+    "baseUrl": "./",
+    "paths": {
+      "~/*": ["./src/*"]
+    }
+  },
+  "include": ["src/**/*", "test/**/*"],
+  "ts-node": {
+    "require": ["tsconfig-paths/register"]
+  }
+}
