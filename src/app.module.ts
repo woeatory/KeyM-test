@@ -6,7 +6,7 @@ import { BookingModule } from './booking/application/booking.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
-      envFilePath: '.env.development.local',
+      envFilePath: '.env',
       load: [configuration],
       cache: true,
     }),

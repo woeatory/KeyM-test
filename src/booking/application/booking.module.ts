@@ -8,6 +8,6 @@ import { BookingDomainService } from '../domain/services/booking.domain.service'
 @Module({
   controllers: [BookingController],
   providers: [BookingService, BookingFactory, BookingDomainService],
-  imports: [BookingInfrastructureModule.register('in-memory')],
+  imports: [BookingInfrastructureModule.register('prisma')],
 })
 export class BookingModule {}

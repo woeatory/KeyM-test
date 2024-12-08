@@ -94,7 +94,7 @@ export class BookingService {
         throw new Error('This date is already booked');
       }
       await this.bookingRepository.update(booking);
-      this.logger.log(`Booking updated: ${booking}`);
+      this.logger.log(`Booking updated: ${JSON.stringify(booking)}`);
       return booking;
     } catch (error) {
       this.logger.error(error);
