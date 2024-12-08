@@ -16,12 +16,27 @@ import { GetBookingCommand } from '../application/commands/get-booking.command';
 import { DeleteBookingCommand } from '../application/commands/delete-booking.command';
 import { UpdateBookingDto } from './dto/update-booking.dto';
 import { UpdateBookingCommand } from '../application/commands/update-booking.command';
+import {
+  ApiBadRequestResponse,
+  ApiCreatedResponse,
+  ApiFoundResponse,
+  ApiOkResponse,
+} from '@nestjs/swagger';
+import { BookingDto } from './dto/booking.dto';
 
 @Controller('bookings')
 export class BookingController {
   constructor(private readonly bookingService: BookingService) {}
 
   @Post()
+  @ApiCreatedResponse({
+    description: 'The booking has been successfully created.',
+    type: BookingDto,
+  })
+  @ApiBadRequestResponse({
+    description: 'Bad request',
+    example: 'Date already booked',
+  })
   async createBooking(@Body() createBookingDto: CreateBookingDto) {
     try {
       return await this.bookingService.createBooking(
@@ -38,6 +53,11 @@ export class BookingController {
   }
 
   @Get(':id')
+  @ApiFoundResponse({ description: 'Booking was found', type: BookingDto })
+  @ApiBadRequestResponse({
+    description: 'Bad request',
+    example: 'Book not found',
+  })
   async getBookingById(@Param('id', ParseUUIDPipe) id: string) {
     try {
       return await this.bookingService.getBooking(new GetBookingCommand(id));
@@ -47,6 +67,10 @@ export class BookingController {
   }
 
   @Get()
+  @ApiFoundResponse({ description: 'List of all bookings', type: [BookingDto] })
+  @ApiBadRequestResponse({
+    description: 'Bad request',
+  })
   async getBookings() {
     try {
       return await this.bookingService.getAllBookings();
@@ -56,6 +80,11 @@ export class BookingController {
   }
 
   @Delete(':id')
+  @ApiOkResponse({ description: 'Booking was deleted' })
+  @ApiBadRequestResponse({
+    description: 'Bad request',
+    example: 'Booking not found',
+  })
   async deleteBooking(@Param('id', ParseUUIDPipe) id: string) {
     try {
       await this.bookingService.deleteBooking(new DeleteBookingCommand(id));
@@ -65,6 +94,11 @@ export class BookingController {
   }
 
   @Put()
+  @ApiOkResponse({ description: 'Booking modified' })
+  @ApiBadRequestResponse({
+    description: 'Bad request',
+    example: 'Booking not found',
+  })
   async updateBooking(@Body() updateBookingDto: UpdateBookingDto) {
     try {
       await this.bookingService.updateBooking(
