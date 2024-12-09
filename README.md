@@ -4,6 +4,17 @@
 $ pnpm install
 ```
 
+## Setup environment varialbes
+
+.env file
+
+```text
+PORT=8000
+MONGODB_CONNECTION_STRING="mongodb+srv://<user>:<password>@cluster0.p2lvg.mongodb.net/database"
+```
+
+You can also switch to in-memory storage instead of mongoDB
+
 ## Compile and run the project
 
 ```bash
@@ -22,9 +33,6 @@ $ pnpm run start:prod
 ```bash
 # unit tests
 $ pnpm run test
-
-# e2e tests
-$ pnpm run test:e2e
 
 # test coverage
 $ pnpm run test:cov
