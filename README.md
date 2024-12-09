@@ -1,3 +1,7 @@
+## Project available
+
+https://keym-test.onrender.com/api#/
+
 ## Project setup
 
 ```bash
@@ -13,7 +17,18 @@ PORT=8000
 MONGODB_CONNECTION_STRING="mongodb+srv://<user>:<password>@cluster0.p2lvg.mongodb.net/database"
 ```
 
-You can also switch to in-memory storage instead of mongoDB
+You can also switch to between in-memory and mondoDB storage
+
+src\booking\application\booking.module.ts
+
+```ts
+@Module({
+  controllers: [BookingController],
+  providers: [BookingService, BookingFactory, BookingDomainService],
+  imports: [BookingInfrastructureModule.register('in-memory')], # or prisma
+})
+export class BookingModule {}
+```
 
 ## Compile and run the project
 
